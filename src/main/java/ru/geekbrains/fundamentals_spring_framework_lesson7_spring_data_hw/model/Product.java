@@ -18,4 +18,6 @@ public class Product {
 
     @Column(name = "price")
     private int price;
+
+   // public Product(Product product) {    }
 }
