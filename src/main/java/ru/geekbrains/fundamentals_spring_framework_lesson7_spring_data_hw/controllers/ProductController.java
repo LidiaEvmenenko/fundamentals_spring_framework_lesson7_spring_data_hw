@@ -3,17 +3,18 @@ import ru.geekbrains.fundamentals_spring_framework_lesson7_spring_data_hw.model.
 import ru.geekbrains.fundamentals_spring_framework_lesson7_spring_data_hw.services.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 public class ProductController {
-    private final ProductService productService;
+    private ProductService productService;
 
     @GetMapping("/products")
-    public List<Product> findAll(){
-        return productService.findAll();
+    public Page<Product> findAll(@RequestParam(name = "page") int pageIndex){
+        return productService.findAll(pageIndex - 1, 10);
     }
 
     @GetMapping("/products/{id}")
