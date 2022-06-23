@@ -15,7 +15,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     public Page<Product> findAll(int pageIndex, int pageSize) {
-        if (pageIndex < 0 ){ return null;}
+     //   if (pageIndex < 0 ){ return null;}
         return productRepository.findAll(PageRequest.of(pageIndex, pageSize));
     }
 
@@ -31,15 +31,10 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public List<Product> findByPriceBetween(int minPrice, int maxPrice){
-        return productRepository.findByPriceBetween(minPrice, maxPrice);
+    public void deleteAll(){
+        productRepository.deleteAll();
     }
-
-    public List<Product> findByPriceLessThanEqual(int maxPrice){
-        return productRepository.findByPriceLessThanEqual(maxPrice);
-    }
-
-    public List<Product> findByPriceGreaterThanEqual(int minPrice){
-        return productRepository.findByPriceGreaterThanEqual(minPrice);
+    public Product findByIdFromUpdate(Long id){
+        return productRepository.getReferenceById(id);
     }
 }
