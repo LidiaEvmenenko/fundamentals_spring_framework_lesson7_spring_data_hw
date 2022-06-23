@@ -1,13 +1,15 @@
 package ru.geekbrains.fundamentals_spring_framework_lesson7_spring_data_hw.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "products")
+@Table(name = "categories")
 @Data
 @NoArgsConstructor
-public class Product {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -16,14 +18,6 @@ public class Product {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "price")
-    private int price;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+    @OneToMany(mappedBy = "category")
+    private List<Product> products;
 }
